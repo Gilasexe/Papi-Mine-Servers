@@ -6,3 +6,5 @@ env
 
 teste_*.py
 *.txt
+
+radar.db
