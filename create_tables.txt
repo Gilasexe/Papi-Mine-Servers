@@ -1,6 +1,0 @@
-CREATE TABLE IF NOT EXISTS historico_servidores (
-    idServidor INTEGER PRIMARY KEY AUTOINCREMENT,
-    enderecoServidor TEXT,
-    qtdJogadores INT,
-    logBotao DATETIME DEFAULT CURRENT_TIMESTAMP )
-
