@@ -1,5 +1,8 @@
+__pycache__
+
 .venv
 venv
 env
 
 teste_*.py
+*.txt
