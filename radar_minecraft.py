@@ -212,10 +212,7 @@ with st.expander("Clique aqui para abrir seus Favoritos", expanded=False):
                                 """, (ip,))
                     conDelFav.commit()
                     print("DELETE efetuado no sistema.")
-                    st.rerun()
-                    # 1. Abre a conexão
-                    # 2. Executa o DELETE mirando no IP específico
-                    # 3. Dá o commit e fecha
+                    st.rerun() # recarrega a pagina sozinho
                 except Exception as e:
                     print(f"DELETE não efetuado, erro: {e}")
                 
@@ -224,7 +221,6 @@ with st.expander("Clique aqui para abrir seus Favoritos", expanded=False):
                         conDelFav.close()
                         print("conexao fechada")
 
-            # Fazemos o pedido. Adicionei um timeout para a página não travar se o servidor estiver lento
             try:
                 resposta = requests.get(urlFavoritos, timeout=7)
                 dados = resposta.json()
@@ -235,7 +231,6 @@ with st.expander("Clique aqui para abrir seus Favoritos", expanded=False):
                     versao = dados.get("version", "Desconhecida")
                     
                     st.success("STATUS: ONLINE 🟢", width=200)
-                    # O st.metric cria um destaque visual bem legal para os números
                     st.metric(label="Jogadores Ativos", value=jogadores_online, delta=f"Max: {jogadores_max}", delta_color="off")
                     st.caption(f"🏷️ Versão: {versao}")
                 else:
