@@ -8,3 +8,8 @@ teste_*.py
 *.txt
 
 radar.db
+
+*.json
+node_modules
+
+inutil/

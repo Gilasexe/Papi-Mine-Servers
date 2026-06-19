@@ -5,7 +5,7 @@ import pandas as pd
 from bd import *
 
 # 1. Deixa a página mais larga para caberem as colunas
-st.set_page_config(page_title="Radar Minecraft", layout="wide", page_icon="logo.png")
+st.set_page_config(page_title="Papi Mine", layout="wide", page_icon="logo.png")
 
 # Finge que são as horas do dia
 historico_24h = [120, 135, 150, 180, 200, 210, 190, 160, 140, 130, 110, 100] 
