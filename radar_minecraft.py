@@ -37,35 +37,43 @@ if 'usuario_id' not in st.session_state:
     st.session_state['usuario_nome'] = None
 
 # 2. Se o crachá estiver vazio, mostra a tela de Login/Registro
+# 2. Se o crachá estiver vazio, mostra a tela de Login/Registro
 if st.session_state['usuario_id'] is None:
-    st.title("Terminal de Acesso - Radar")
     
-    # Cria duas abas pra ficar organizado
-    aba_login, aba_registro = st.tabs(["🔑 Entrar", "📝 Nova Conta"])
+    # Criamos 3 colunas: as da ponta (1.5) são mais largas para "espremer" a do meio (1)
+    col_vazia_esq, col_login, col_vazia_dir = st.columns([1.5, 1, 1.5])
     
-    with aba_login:
-        login_user = st.text_input("Usuário", key="log_user", width=350)
-        login_senha = st.text_input("Senha", type="password", key="log_pass", width=350)
+    # TUDO do login vai aqui dentro agora!
+    with col_login:
+        st.title("Terminal de Acesso", anchor=False) # anchor=False tira o ícone de link chato
         
-        if st.button("Acessar"):
-            user_id = verificar_login(login_user, login_senha)
-            if user_id:
-                # Login deu certo! Entrega o crachá e recarrega a página.
-                st.session_state['usuario_id'] = user_id
-                st.session_state['usuario_nome'] = login_user
-                st.rerun() 
-            else:
-                st.error("Usuário ou senha incorretos!")
+        # Cria duas abas pra ficar organizado
+        aba_login, aba_registro = st.tabs(["🔑 Entrar", "📝 Nova Conta"])
+        
+        with aba_login:
+            # Como a coluna é estreita, a caixa e o texto ficam centralizados na tela
+            login_user = st.text_input("Usuário", key="log_user")
+            login_senha = st.text_input("Senha", type="password", key="log_pass")
+            
+            # O botão estica pra preencher o bloquinho certinho
+            if st.button("Acessar", use_container_width=True):
+                user_id = verificar_login(login_user, login_senha)
+                if user_id:
+                    st.session_state['usuario_id'] = user_id
+                    st.session_state['usuario_nome'] = login_user
+                    st.rerun() 
+                else:
+                    st.error("Usuário ou senha incorretos!")
 
-    with aba_registro:
-        reg_user = st.text_input("Novo Usuário", key="reg_user", width=350)
-        reg_senha = st.text_input("Nova Senha", type="password", key="reg_pass", width=350)
-        
-        if st.button("Criar Conta"):
-            if criar_usuario(reg_user, reg_senha):
-                st.success("Conta criada com sucesso! Vá na aba de Entrar.")
-            else:
-                st.error("Esse nome de usuário já está em uso!")
+        with aba_registro:
+            reg_user = st.text_input("Novo Usuário", key="reg_user")
+            reg_senha = st.text_input("Nova Senha", type="password", key="reg_pass")
+            
+            if st.button("Criar Conta", use_container_width=True):
+                if criar_usuario(reg_user, reg_senha):
+                    st.success("Conta criada com sucesso! Vá na aba de Entrar.")
+                else:
+                    st.error("Esse nome de usuário já está em uso!")
 
 # 3. Se ele tiver o crachá (logado), mostra o sistema inteiro!
 else:
