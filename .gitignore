@@ -6,8 +6,6 @@ env
 
 teste_*.py
 
-radar.db
-
 *.json
 node_modules
 
