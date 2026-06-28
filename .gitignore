@@ -10,3 +10,4 @@ teste_*.py
 node_modules
 
 testes/
+.streamlit/
